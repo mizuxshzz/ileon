@@ -13,7 +13,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
 }
 
 body{
@@ -22,10 +22,10 @@ color:white;
 display:flex;
 justify-content:center;
 padding:40px 15px;
+overflow-x:hidden;
 }
 
 /* grid background */
-
 body::before{
 content:"";
 position:fixed;
@@ -35,7 +35,149 @@ background-image:
 linear-gradient(rgba(150,0,255,0.08) 1px, transparent 1px),
 linear-gradient(90deg, rgba(150,0,255,0.08) 1px, transparent 1px);
 background-size:50px 50px;
-z-index:-1;
+z-index:-2;
+}
+
+/* =========================
+   INTRO SCREEN
+========================= */
+.intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:9999;
+animation:introFadeOut 3.8s ease forwards;
+}
+
+.intro::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:radial-gradient(circle, rgba(160,0,255,0.15) 0%, rgba(0,0,0,1) 70%);
+animation:glowPulse 2s ease-in-out infinite;
+}
+
+.intro-text{
+position:relative;
+font-size:34px;
+letter-spacing:8px;
+color:#d79cff;
+text-shadow:0 0 8px #a200ff, 0 0 20px #a200ff;
+opacity:0;
+animation:textReveal 2.5s ease forwards;
+z-index:2;
+}
+
+.intro-sub{
+position:relative;
+margin-top:12px;
+font-size:12px;
+letter-spacing:4px;
+color:rgba(255,255,255,0.6);
+opacity:0;
+animation:subReveal 2.8s ease forwards;
+z-index:2;
+}
+
+@keyframes textReveal{
+0%{
+opacity:0;
+transform:scale(0.8);
+filter:blur(8px);
+}
+40%{
+opacity:1;
+transform:scale(1);
+filter:blur(0);
+}
+100%{
+opacity:1;
+transform:scale(1);
+filter:blur(0);
+}
+}
+
+@keyframes subReveal{
+0%,35%{
+opacity:0;
+transform:translateY(10px);
+}
+100%{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes glowPulse{
+0%,100%{
+opacity:0.6;
+}
+50%{
+opacity:1;
+}
+}
+
+@keyframes introFadeOut{
+0%,75%{
+opacity:1;
+visibility:visible;
+}
+100%{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
+}
+
+/* flash overlay */
+.flash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle, rgba(180,80,255,0.15), rgba(0,0,0,0.95));
+z-index:9998;
+opacity:1;
+animation:flashFade 2.8s ease forwards;
+pointer-events:none;
+}
+
+@keyframes flashFade{
+0%{
+opacity:1;
+}
+50%{
+opacity:0.8;
+}
+100%{
+opacity:0;
+}
+}
+
+/* main content fade in */
+.main-content{
+width:100%;
+display:flex;
+justify-content:center;
+opacity:0;
+transform:translateY(20px);
+animation:mainReveal 1.2s ease 2.9s forwards;
+}
+
+@keyframes mainReveal{
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .container{
@@ -44,7 +186,6 @@ width:100%;
 }
 
 /* profile */
-
 .profile{
 background:rgba(20,0,40,0.6);
 border-radius:20px;
@@ -61,6 +202,7 @@ height:110px;
 border-radius:50%;
 border:4px solid #b100ff;
 box-shadow:0 0 20px #b100ff;
+object-fit:cover;
 }
 
 .title{
@@ -77,7 +219,6 @@ margin-top:5px;
 }
 
 /* section */
-
 .section{
 margin-top:30px;
 }
@@ -101,7 +242,6 @@ opacity:.5;
 }
 
 /* link button */
-
 .link{
 display:flex;
 align-items:center;
@@ -122,7 +262,6 @@ box-shadow:0 0 10px #a200ff;
 }
 
 /* icon */
-
 .icon{
 font-size:20px;
 margin-right:12px;
@@ -144,7 +283,6 @@ opacity:.7;
 }
 
 /* tag */
-
 .tag{
 font-size:9px;
 padding:3px 8px;
@@ -158,123 +296,164 @@ color:#c27cff;
 font-size:18px;
 }
 
+/* optional tap sound notice */
+.tap-note{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(20,0,40,0.85);
+border:1px solid rgba(160,0,255,0.35);
+color:#d79cff;
+padding:10px 16px;
+border-radius:14px;
+font-size:12px;
+letter-spacing:1px;
+box-shadow:0 0 15px rgba(160,0,255,0.25);
+z-index:9997;
+opacity:0;
+pointer-events:none;
+transition:0.4s;
+}
+
+.tap-note.show{
+opacity:1;
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <div class="intro-text">LEON R.</div>
+  <div class="intro-sub">ENTERING PROFILE</div>
+</div>
+
+<div class="flash"></div>
+
+<div class="tap-note" id="tapNote">Tap layar untuk aktifkan sound</div>
+
+<!-- AUDIO -->
+<audio id="introSound" preload="auto">
+  <!-- GANTI LINK INI DENGAN SOUND LU SENDIRI -->
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=future-logo-124194.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
 <div class="container">
 
 <div class="profile">
-
-<img src="https://j.top4top.io/p_3727yg2me1.jpg">
-
+<img src="https://j.top4top.io/p_3727yg2me1.jpg" alt="Profile">
 <div class="title">Leon R.</div>
 <div class="subtitle">ALL SOCIAL MEDIA LEON</div>
-
 </div>
 
 <!-- YOUTUBE -->
-
 <div class="section">
-
 <div class="section-title">YOUTUBE AND TIKTOK</div>
 
 <a class="link" href="https://www.youtube.com/@nixellon" target="_blank">
-
 <div class="link-left">
 <i class="fab fa-youtube icon"></i>
-
 <div>
 <div class="link-title">YOUTUBE CHANNEL <span class="tag">PRIMARY</span></div>
 <div class="link-desc">this is my channel</div>
 </div>
 </div>
-
 <div class="arrow">→</div>
-
 </a>
 
-
 <a class="link" href="https://www.tiktok.com/@ileon.r" target="_blank">
-
 <div class="link-left">
 <i class="fab fa-tiktok icon"></i>
-
 <div>
 <div class="link-title">TIKTOK <span class="tag">PRIMARY</span></div>
 <div class="link-desc">Leon's personal TikTok account</div>
 </div>
 </div>
-
 <div class="arrow">→</div>
-
 </a>
-
 </div>
 
 <!-- WHATSAPP -->
-
 <div class="section">
-
 <div class="section-title">WHATSAPP</div>
 
 <a class="link" href="https://wa.me/6285880712388" target="_blank">
-
 <div class="link-left">
 <i class="fab fa-whatsapp icon"></i>
-
 <div>
 <div class="link-title">WHATSAPP NUMBER <span class="tag">PERSONAL</span></div>
 <div class="link-desc">Send a message if necessary</div>
 </div>
 </div>
-
 <div class="arrow">→</div>
-
 </a>
-
 </div>
 
 <!-- SOCIAL -->
-
 <div class="section">
-
-<div class="section-title">OTHER SOCIAL MEDIA </div>
+<div class="section-title">OTHER SOCIAL MEDIA</div>
 
 <a class="link" href="https://www.instagram.com/nixellv" target="_blank">
-
 <div class="link-left">
 <i class="fab fa-instagram icon"></i>
-
 <div>
 <div class="link-title">INSTAGRAM <span class="tag">VISUAL</span></div>
 <div class="link-desc">Daily content & stories</div>
 </div>
 </div>
-
 <div class="arrow">→</div>
-
 </a>
 
 <a class="link" href="https://t.me/nixellflow" target="_blank">
-
 <div class="link-left">
 <i class="fab fa-telegram icon"></i>
-
 <div>
 <div class="link-title">TELEGRAM <span class="tag">CONTACT</span></div>
 <div class="link-desc">Chat Telegram</div>
 </div>
 </div>
-
 <div class="arrow">→</div>
-
 </a>
-
 </div>
 
 </div>
+</div>
+
+<script>
+const introSound = document.getElementById("introSound");
+const tapNote = document.getElementById("tapNote");
+
+let soundPlayed = false;
+
+// coba autoplay setelah page load
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    introSound.volume = 0.8;
+    introSound.play().then(() => {
+      soundPlayed = true;
+    }).catch(() => {
+      // kalau autoplay diblokir browser
+      tapNote.classList.add("show");
+    });
+  }, 400);
+});
+
+// kalau autoplay gagal, pas user tap pertama kali baru play
+document.addEventListener("click", () => {
+  if (!soundPlayed) {
+    introSound.volume = 0.8;
+    introSound.play().then(() => {
+      soundPlayed = true;
+      tapNote.classList.remove("show");
+    }).catch(() => {});
+  }
+}, { once: true });
+</script>
 
 </body>
-</html>
+  </html>
