@@ -1,734 +1,659 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Leon R. | Neon Profile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leon R.</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#05000d;
-  --bg2:#0b0216;
-  --card:rgba(18,0,35,0.55);
-  --border:rgba(183, 74, 255, 0.35);
-  --glow:#b100ff;
-  --glow2:#7a2bff;
-  --text:#ffffff;
-  --sub:#cba3ff;
-  --muted:rgba(255,255,255,0.68);
-}
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-  -webkit-tap-highlight-color: transparent;
-}
+    :root{
+      --bg:#05010c;
+      --bg2:#0b0218;
+      --card:rgba(18, 5, 38, 0.72);
+      --card2:rgba(30, 8, 58, 0.78);
+      --line:rgba(177, 0, 255, 0.28);
+      --glow:rgba(177, 0, 255, 0.35);
+      --glow-strong:rgba(177, 0, 255, 0.6);
+      --text:#ffffff;
+      --sub:#d7b9ff;
+      --muted:rgba(255,255,255,0.68);
+      --accent:#b100ff;
+      --accent2:#7a2bff;
+    }
 
-html{
-  scroll-behavior:smooth;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-body{
-  background:
-    radial-gradient(circle at 50% 10%, rgba(177,0,255,0.12), transparent 35%),
-    radial-gradient(circle at 20% 80%, rgba(120,0,255,0.08), transparent 30%),
-    linear-gradient(180deg, var(--bg), var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-  display:flex;
-  justify-content:center;
-  padding:30px 14px 50px;
-  position:relative;
-}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(177,0,255,0.14), transparent 28%),
+        radial-gradient(circle at 80% 10%, rgba(122,43,255,0.12), transparent 25%),
+        radial-gradient(circle at 50% 100%, rgba(90,0,180,0.14), transparent 30%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      padding:34px 14px 50px;
+      font-family:'Inter', sans-serif;
+      overflow-x:hidden;
+      position:relative;
+    }
 
-/* GRID */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(150,0,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(150,0,255,0.06) 1px, transparent 1px);
-  background-size:44px 44px;
-  z-index:-4;
-  animation:gridMove 14s linear infinite;
-}
+    /* grid */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(170,0,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(170,0,255,0.06) 1px, transparent 1px);
+      background-size:42px 42px;
+      z-index:-3;
+      pointer-events:none;
+    }
 
-@keyframes gridMove{
-  from{ transform:translateY(0); }
-  to{ transform:translateY(44px); }
-}
+    /* glow blobs */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(177,0,255,0.08), transparent 18%),
+        radial-gradient(circle at 85% 15%, rgba(140,0,255,0.08), transparent 16%),
+        radial-gradient(circle at 50% 80%, rgba(100,0,255,0.06), transparent 20%);
+      z-index:-2;
+      pointer-events:none;
+      filter: blur(8px);
+    }
 
-/* FLOATING GLOW ORBS */
-.orb{
-  position:fixed;
-  border-radius:50%;
-  filter:blur(60px);
-  z-index:-3;
-  opacity:0.35;
-  animation:floatOrb 8s ease-in-out infinite alternate;
-}
-.orb1{
-  width:180px; height:180px;
-  background:#7b00ff;
-  top:8%;
-  left:-40px;
-}
-.orb2{
-  width:220px; height:220px;
-  background:#a000ff;
-  right:-70px;
-  top:35%;
-  animation-duration:10s;
-}
-.orb3{
-  width:160px; height:160px;
-  background:#5500ff;
-  bottom:8%;
-  left:25%;
-  animation-duration:12s;
-}
-@keyframes floatOrb{
-  from{ transform:translateY(-10px) translateX(0px) scale(1); }
-  to{ transform:translateY(18px) translateX(10px) scale(1.08); }
-}
+    .container{
+      width:100%;
+      max-width:430px;
+      position:relative;
+      z-index:2;
+    }
 
-/* INTRO SCREEN */
-.intro{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at center, rgba(140,0,255,0.08), #000 60%);
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  overflow:hidden;
-  animation:introFadeOut 5.2s ease forwards;
-}
+    /* TOP GLOW LINE */
+    .top-line{
+      width:100%;
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(177,0,255,0.9), transparent);
+      box-shadow:0 0 18px rgba(177,0,255,0.55);
+      border-radius:999px;
+      margin-bottom:18px;
+      animation: pulseLine 2.8s infinite ease-in-out;
+    }
 
-.intro::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.02) 0px,
-    rgba(255,255,255,0.02) 1px,
-    transparent 2px,
-    transparent 5px
-  );
-  animation:scanMove 4s linear infinite;
-  opacity:0.45;
-}
+    @keyframes pulseLine{
+      0%,100%{ opacity:.6; transform:scaleX(.96); }
+      50%{ opacity:1; transform:scaleX(1); }
+    }
 
-@keyframes scanMove{
-  from{ transform:translateY(-20px); }
-  to{ transform:translateY(20px); }
-}
+    /* PROFILE */
+    .profile{
+      position:relative;
+      background:linear-gradient(180deg, rgba(18,4,38,0.88), rgba(10,3,25,0.92));
+      border:1px solid rgba(177,0,255,0.28);
+      border-radius:28px;
+      padding:30px 24px 24px;
+      text-align:center;
+      overflow:hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 0 28px rgba(177,0,255,0.18),
+        0 0 80px rgba(80,0,130,0.12);
+      backdrop-filter: blur(10px);
+      margin-bottom:26px;
+    }
 
-.intro-logo{
-  position:relative;
-  font-size:42px;
-  font-weight:700;
-  letter-spacing:10px;
-  color:#e5b7ff;
-  text-shadow:
-    0 0 8px rgba(177,0,255,0.8),
-    0 0 24px rgba(177,0,255,0.8),
-    0 0 50px rgba(177,0,255,0.45);
-  opacity:0;
-  animation:logoIn 1.6s ease 0.2s forwards, glitch 0.18s linear 2.1s 5;
-  z-index:2;
-}
+    .profile::before{
+      content:"";
+      position:absolute;
+      top:-80px;
+      left:50%;
+      transform:translateX(-50%);
+      width:240px;
+      height:240px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(177,0,255,0.18), transparent 65%);
+      filter:blur(8px);
+      pointer-events:none;
+    }
 
-.intro-sub{
-  margin-top:14px;
-  font-size:12px;
-  letter-spacing:5px;
-  color:rgba(255,255,255,0.65);
-  opacity:0;
-  animation:subIn 1.2s ease 1.1s forwards;
-  z-index:2;
-}
+    .profile::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:28px;
+      padding:1px;
+      background:linear-gradient(135deg, rgba(177,0,255,0.25), transparent, rgba(177,0,255,0.15));
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+    }
 
-.intro-line{
-  margin-top:18px;
-  width:0;
-  height:2px;
-  background:linear-gradient(90deg, transparent, #b100ff, transparent);
-  box-shadow:0 0 12px #b100ff;
-  animation:lineGrow 1s ease 1.5s forwards;
-  z-index:2;
-}
+    .pfp-wrap{
+      position:relative;
+      width:126px;
+      height:126px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
 
-@keyframes logoIn{
-  0%{ opacity:0; transform:scale(0.8); filter:blur(10px); }
-  100%{ opacity:1; transform:scale(1); filter:blur(0); }
-}
-@keyframes subIn{
-  from{ opacity:0; transform:translateY(8px); }
-  to{ opacity:1; transform:translateY(0); }
-}
-@keyframes lineGrow{
-  from{ width:0; }
-  to{ width:180px; }
-}
-@keyframes glitch{
-  0%{ transform:translate(0); }
-  20%{ transform:translate(-2px,1px); }
-  40%{ transform:translate(2px,-1px); }
-  60%{ transform:translate(-1px,2px); }
-  80%{ transform:translate(1px,-2px); }
-  100%{ transform:translate(0); }
-}
-@keyframes introFadeOut{
-  0%,78%{
-    opacity:1;
-    visibility:visible;
-  }
-  100%{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-  }
-}
+    .pfp-ring{
+      position:absolute;
+      width:126px;
+      height:126px;
+      border-radius:50%;
+      border:1px solid rgba(177,0,255,0.35);
+      box-shadow:
+        0 0 18px rgba(177,0,255,0.28),
+        inset 0 0 14px rgba(177,0,255,0.18);
+    }
 
-/* FLASH */
-.flash{
-  position:fixed;
-  inset:0;
-  z-index:9998;
-  background:
-    radial-gradient(circle at center, rgba(190,100,255,0.15), rgba(0,0,0,0.95));
-  opacity:1;
-  pointer-events:none;
-  animation:flashOut 4.2s ease forwards;
-}
-@keyframes flashOut{
-  0%{ opacity:1; }
-  65%{ opacity:0.8; }
-  100%{ opacity:0; }
-}
+    .pfp{
+      width:110px;
+      height:110px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid rgba(177,0,255,0.65);
+      box-shadow:
+        0 0 18px rgba(177,0,255,0.35),
+        0 0 35px rgba(177,0,255,0.18);
+      display:block;
+    }
 
-/* TAP NOTICE */
-.tap-note{
-  position:fixed;
-  left:50%;
-  bottom:20px;
-  transform:translateX(-50%);
-  background:rgba(18,0,35,0.88);
-  border:1px solid rgba(177,0,255,0.35);
-  color:#e1b2ff;
-  padding:10px 16px;
-  border-radius:999px;
-  font-size:12px;
-  letter-spacing:1px;
-  box-shadow:0 0 18px rgba(177,0,255,0.22);
-  z-index:9997;
-  opacity:0;
-  pointer-events:none;
-  transition:0.4s ease;
-}
-.tap-note.show{
-  opacity:1;
-}
+    .name{
+      margin-top:18px;
+      font-family:'Orbitron', sans-serif;
+      font-size:34px;
+      letter-spacing:3px;
+      font-weight:800;
+      color:#ffffff;
+      text-transform:uppercase;
+      text-shadow:
+        0 0 8px rgba(177,0,255,0.5),
+        0 0 18px rgba(177,0,255,0.35),
+        0 0 35px rgba(177,0,255,0.25);
+    }
 
-/* MAIN */
-.main{
-  width:100%;
-  max-width:430px;
-  opacity:0;
-  transform:translateY(22px);
-  animation:mainIn 1.2s ease 3.9s forwards;
-}
+    .subtitle{
+      margin-top:8px;
+      font-size:11px;
+      letter-spacing:3px;
+      color:rgba(231,198,255,0.78);
+      text-transform:uppercase;
+    }
 
-@keyframes mainIn{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
+    .mini-status{
+      margin:14px auto 0;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(177,0,255,0.08);
+      border:1px solid rgba(177,0,255,0.18);
+      font-size:10px;
+      letter-spacing:1.5px;
+      color:#eacfff;
+      text-transform:uppercase;
+    }
 
-/* PROFILE CARD */
-.profile{
-  position:relative;
-  background:linear-gradient(180deg, rgba(18,0,35,0.72), rgba(8,0,20,0.68));
-  border:1px solid rgba(177,0,255,0.28);
-  border-radius:28px;
-  padding:34px 24px 28px;
-  text-align:center;
-  margin-bottom:26px;
-  overflow:hidden;
-  backdrop-filter: blur(12px);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.02) inset,
-    0 0 25px rgba(177,0,255,0.16),
-    0 0 60px rgba(98,0,255,0.10);
-}
+    .mini-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#c6ff86;
+      box-shadow:0 0 10px #c6ff86;
+      animation: blinkDot 1.4s infinite;
+    }
 
-.profile::before{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:28px;
-  padding:1px;
-  background:linear-gradient(135deg, rgba(177,0,255,0.6), transparent, rgba(120,0,255,0.35));
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-  pointer-events:none;
-}
+    @keyframes blinkDot{
+      0%,100%{ opacity:1; }
+      50%{ opacity:.45; }
+    }
 
-.profile::after{
-  content:"";
-  position:absolute;
-  top:-60%;
-  left:-30%;
-  width:160%;
-  height:80%;
-  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.06), transparent);
-  transform:rotate(8deg);
-  animation:shineSweep 6s ease-in-out infinite;
-}
+    /* MUSIC BUTTON */
+    .music-btn{
+      margin-top:16px;
+      background:linear-gradient(90deg, rgba(122,43,255,0.18), rgba(177,0,255,0.18));
+      border:1px solid rgba(177,0,255,0.32);
+      color:#efd7ff;
+      padding:11px 18px;
+      border-radius:999px;
+      font-size:11px;
+      letter-spacing:1.4px;
+      cursor:pointer;
+      transition:0.3s ease;
+      box-shadow:0 0 16px rgba(177,0,255,0.12);
+      font-weight:700;
+      text-transform:uppercase;
+    }
 
-@keyframes shineSweep{
-  0%,100%{ transform:translateX(-60%) rotate(8deg); opacity:0; }
-  25%{ opacity:1; }
-  50%{ transform:translateX(50%) rotate(8deg); opacity:0.9; }
-  75%{ opacity:0; }
-}
+    .music-btn:hover,
+    .music-btn:active{
+      transform:scale(1.04);
+      box-shadow:0 0 20px rgba(177,0,255,0.22);
+    }
 
-.avatar-wrap{
-  position:relative;
-  width:126px;
-  height:126px;
-  margin:0 auto;
-  border-radius:50%;
-  padding:4px;
-  background:conic-gradient(from 0deg, #b100ff, #6a00ff, #d500ff, #b100ff);
-  animation:spinRing 5s linear infinite;
-  box-shadow:
-    0 0 20px rgba(177,0,255,0.5),
-    0 0 40px rgba(177,0,255,0.25);
-}
+    .music-btn i{
+      margin-right:7px;
+    }
 
-@keyframes spinRing{
-  to{ transform:rotate(360deg); }
-}
+    /* TAP NOTE */
+    .tap-note{
+      position:fixed;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%) translateY(18px);
+      background:rgba(10,0,25,0.88);
+      color:#f2dcff;
+      border:1px solid rgba(177,0,255,0.26);
+      border-radius:999px;
+      padding:12px 16px;
+      font-size:11px;
+      letter-spacing:1px;
+      opacity:0;
+      pointer-events:none;
+      transition:.35s ease;
+      box-shadow:0 0 18px rgba(177,0,255,0.14);
+      z-index:999;
+      backdrop-filter:blur(8px);
+      text-align:center;
+      max-width:90%;
+    }
 
-.avatar-inner{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  background:#120021;
-  padding:4px;
-}
+    .tap-note.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
 
-.avatar-inner img{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
-  display:block;
-  animation:avatarPulse 2.8s ease-in-out infinite;
-}
+    /* SECTION */
+    .section{
+      margin-top:24px;
+    }
 
-@keyframes avatarPulse{
-  0%,100%{
-    box-shadow:0 0 18px rgba(177,0,255,0.35);
-    transform:scale(1);
-  }
-  50%{
-    box-shadow:0 0 32px rgba(177,0,255,0.65);
-    transform:scale(1.02);
-  }
-}
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:11px;
+      letter-spacing:2px;
+      color:#d7a8ff;
+      margin-bottom:14px;
+      text-transform:uppercase;
+      font-weight:700;
+      padding:0 4px;
+    }
 
-.name{
-  margin-top:18px;
-  font-family:'Orbitron', sans-serif;
-  font-size:34px;
-  letter-spacing:3px;
-  font-weight:800;
-  color:#ffffff;
-  text-transform:uppercase;
-  text-shadow:
-    0 0 8px rgba(177,0,255,0.5),
-    0 0 18px rgba(177,0,255,0.35),
-    0 0 35px rgba(177,0,255,0.25);
-}
+    .section-title::before{
+      content:"◆";
+      font-size:10px;
+      color:#b100ff;
+      text-shadow:0 0 8px rgba(177,0,255,0.45);
+    }
 
-.bio{
-  margin-top:8px;
-  font-size:12px;
-  letter-spacing:3px;
-  color:rgba(255,255,255,0.68);
-}
+    .section-title::after{
+      content:"";
+      flex:1;
+      height:1px;
+      background:linear-gradient(90deg, rgba(177,0,255,0.5), transparent);
+      opacity:.8;
+    }
 
-.mini-status{
-  margin-top:16px;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 14px;
-  border-radius:999px;
-  border:1px solid rgba(177,0,255,0.28);
-  background:rgba(177,0,255,0.08);
-  color:#ddb4ff;
-  font-size:11px;
-  letter-spacing:1px;
-}
-.mini-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#b100ff;
-  box-shadow:0 0 10px #b100ff;
-  animation:dotPulse 1.6s infinite;
-}
-@keyframes dotPulse{
-  0%,100%{ transform:scale(1); opacity:1; }
-  50%{ transform:scale(1.4); opacity:0.7; }
-}
+    /* LINKS */
+    .link{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      text-decoration:none;
+      color:var(--text);
+      background:linear-gradient(180deg, rgba(20,5,40,0.85), rgba(11,2,24,0.92));
+      border:1px solid rgba(177,0,255,0.18);
+      border-radius:20px;
+      padding:16px;
+      margin-bottom:12px;
+      overflow:hidden;
+      transition:.28s ease;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 0 20px rgba(177,0,255,0.07);
+      backdrop-filter:blur(8px);
+    }
 
-/* SECTION */
-.section{
-  margin-top:22px;
-  animation:cardReveal 0.8s ease both;
-}
-.section:nth-of-type(2){ animation-delay:4.2s; }
-.section:nth-of-type(3){ animation-delay:4.4s; }
-.section:nth-of-type(4){ animation-delay:4.6s; }
+    .link::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, transparent 10%, rgba(177,0,255,0.07) 50%, transparent 90%);
+      transform:translateX(-120%);
+      transition:.5s ease;
+    }
 
-@keyframes cardReveal{
-  from{
-    opacity:0;
-    transform:translateY(18px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
+    .link:hover::before{
+      transform:translateX(120%);
+    }
 
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:13px;
-  letter-spacing:4px;
-  color:#d29eff;
-  margin-bottom:14px;
-  text-transform:uppercase;
-}
+    .link:hover{
+      transform:translateY(-2px) scale(1.01);
+      border-color:rgba(177,0,255,0.32);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.03) inset,
+        0 0 18px rgba(177,0,255,0.12),
+        0 0 35px rgba(177,0,255,0.08);
+    }
 
-.section-title::after{
-  content:"";
-  flex:1;
-  height:1px;
-  background:linear-gradient(90deg, rgba(177,0,255,0.6), transparent);
-  box-shadow:0 0 8px rgba(177,0,255,0.2);
-}
+    .link-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
 
-/* LINK CARD */
-.link{
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  text-decoration:none;
-  color:white;
-  background:linear-gradient(180deg, rgba(28,0,55,0.6), rgba(12,0,28,0.72));
-  border:1px solid rgba(177,0,255,0.22);
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:12px;
-  overflow:hidden;
-  backdrop-filter: blur(10px);
-  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.015) inset,
-    0 0 20px rgba(177,0,255,0.06);
-}
+    .icon-wrap{
+      width:44px;
+      height:44px;
+      min-width:44px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg, rgba(177,0,255,0.16), rgba(90,0,160,0.12));
+      border:1px solid rgba(177,0,255,0.18);
+      box-shadow: inset 0 0 14px rgba(177,0,255,0.08);
+    }
 
-.link::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.05), transparent);
-  transform:translateX(-120%);
-  transition:0.6s ease;
-}
+    .icon{
+      font-size:20px;
+      color:#d39bff;
+      text-shadow:0 0 10px rgba(177,0,255,0.3);
+    }
 
-.link:hover::before,
-.link:active::before{
-  transform:translateX(120%);
-}
+    .text-wrap{
+      min-width:0;
+    }
 
-.link:hover,
-.link:active{
-  transform:translateY(-3px) scale(1.01);
-  border-color:rgba(177,0,255,0.45);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.03) inset,
-    0 0 18px rgba(177,0,255,0.18),
-    0 0 35px rgba(177,0,255,0.10);
-}
+    .link-title{
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.6px;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:6px;
+    }
 
-.link-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  min-width:0;
-}
+    .link-desc{
+      margin-top:4px;
+      font-size:11px;
+      color:rgba(255,255,255,0.62);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
 
-.icon-box{
-  min-width:46px;
-  width:46px;
-  height:46px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(177,0,255,0.08);
-  border:1px solid rgba(177,0,255,0.2);
-  box-shadow:0 0 14px rgba(177,0,255,0.08) inset;
-}
+    .tag{
+      font-size:9px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(122,43,255,0.9), rgba(177,0,255,0.9));
+      color:white;
+      letter-spacing:.8px;
+      box-shadow:0 0 12px rgba(177,0,255,0.18);
+      text-transform:uppercase;
+      font-weight:700;
+    }
 
-.icon{
-  font-size:20px;
-  color:#d8a7ff;
-}
+    .arrow{
+      min-width:36px;
+      width:36px;
+      height:36px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(177,0,255,0.08);
+      border:1px solid rgba(177,0,255,0.14);
+      color:#d9a8ff;
+      font-size:16px;
+      transition:.25s ease;
+    }
 
-.link-text{
-  min-width:0;
-}
+    .link:hover .arrow{
+      transform:translateX(2px);
+      box-shadow:0 0 14px rgba(177,0,255,0.14);
+    }
 
-.link-title{
-  font-size:14px;
-  letter-spacing:1px;
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:6px;
-}
+    /* FOOTER */
+    .footer{
+      margin-top:22px;
+      text-align:center;
+      font-size:10px;
+      letter-spacing:2px;
+      color:rgba(255,255,255,0.45);
+      text-transform:uppercase;
+      padding-bottom:10px;
+    }
 
-.link-desc{
-  font-size:11px;
-  color:rgba(255,255,255,0.65);
-  margin-top:3px;
-}
+    @media (max-width:480px){
+      .name{
+        font-size:30px;
+      }
 
-.tag{
-  font-size:9px;
-  padding:4px 9px;
-  border-radius:999px;
-  background:linear-gradient(90deg, #7a2bff, #b100ff);
-  color:white;
-  letter-spacing:1px;
-  box-shadow:0 0 10px rgba(177,0,255,0.25);
-}
+      .profile{
+        padding:26px 18px 22px;
+      }
 
-.arrow{
-  font-size:18px;
-  color:#d6a4ff;
-  margin-left:12px;
-  text-shadow:0 0 10px rgba(177,0,255,0.4);
-}
+      .link{
+        padding:14px;
+      }
 
-/* FOOTER */
-.footer{
-  margin-top:26px;
-  text-align:center;
-  font-size:11px;
-  letter-spacing:2px;
-  color:rgba(255,255,255,0.4);
-  padding:10px 0 0;
-}
+      .link-title{
+        font-size:12px;
+      }
 
-/* MOBILE */
-@media (max-width:480px){
-  .intro-logo{
-    font-size:34px;
-    letter-spacing:7px;
-  }
-  .name{
-    font-size:28px;
-    letter-spacing:2px;
-  }
-  .profile{
-    padding:28px 18px 24px;
-  }
-}
-</style>
+      .link-desc{
+        font-size:10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- AMBIENT ORBS -->
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://d4.tfdl.net/public/2026-03-17/43b21628-796c-4443-97da-826fd2446755/The%20One%20That%20Got%20Away%20%20%20Katy%20Perry.m4a" type="audio/mp4">
+  </audio>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-  <div class="intro-logo">LEON R.</div>
-  <div class="intro-sub">SYSTEM ONLINE</div>
-  <div class="intro-line"></div>
-</div>
+  <div class="container">
 
-<div class="flash"></div>
+    <div class="top-line"></div>
 
-<!-- SOUND NOTICE -->
-<div class="tap-note" id="tapNote">Tap layar untuk aktifkan music</div>
-
-<!-- AUDIO -->
-<audio id="bgMusic" loop preload="auto">
-  <source src="https://d4.tfdl.net/public/2026-03-17/43b21628-796c-4443-97da-826fd2446755/The%20One%20That%20Got%20Away%20%20%20Katy%20Perry.m4a" type="audio/mp4">
-</audio>
-
-<!-- MAIN -->
-<div class="main">
-
-  <!-- PROFILE -->
-  <div class="profile">
-    <div class="avatar-wrap">
-      <div class="avatar-inner">
-        <img src="https://j.top4top.io/p_3727yg2me1.jpg" alt="Leon">
+    <div class="profile">
+      <div class="pfp-wrap">
+        <div class="pfp-ring"></div>
+        <img class="pfp" src="https://j.top4top.io/p_3727yg2me1.jpg" alt="Leon Profile">
       </div>
+
+      <div class="name">Leon R.</div>
+      <div class="subtitle">ALL SOCIAL MEDIA LEON</div>
+
+      <div class="mini-status">
+        <span class="mini-dot"></span>
+        DIGITAL PRESENCE ACTIVE
+      </div>
+
+      <button class="music-btn" id="musicBtn">
+        <i class="fas fa-volume-up"></i> MUSIC ON
+      </button>
     </div>
 
-    <div class="name">Leon R.</div>
-    <div class="bio">ALL SOCIAL MEDIA LEON</div>
+    <!-- YOUTUBE + TIKTOK -->
+    <div class="section">
+      <div class="section-title">YouTube & TikTok</div>
 
-    <div class="mini-status">
-      <span class="mini-dot"></span>
-      DIGITAL PRESENCE ACTIVE
+      <a class="link" href="https://www.youtube.com/@nixellon" target="_blank">
+        <div class="link-left">
+          <div class="icon-wrap">
+            <i class="fab fa-youtube icon"></i>
+          </div>
+          <div class="text-wrap">
+            <div class="link-title">YOUTUBE CHANNEL <span class="tag">Primary</span></div>
+            <div class="link-desc">This is my channel</div>
+          </div>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+      <a class="link" href="https://www.tiktok.com/@ileon.r" target="_blank">
+        <div class="link-left">
+          <div class="icon-wrap">
+            <i class="fab fa-tiktok icon"></i>
+          </div>
+          <div class="text-wrap">
+            <div class="link-title">TIKTOK <span class="tag">Primary</span></div>
+            <div class="link-desc">Leon's personal TikTok account</div>
+          </div>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
     </div>
+
+    <!-- WHATSAPP -->
+    <div class="section">
+      <div class="section-title">WhatsApp</div>
+
+      <a class="link" href="https://wa.me/6285880712388" target="_blank">
+        <div class="link-left">
+          <div class="icon-wrap">
+            <i class="fab fa-whatsapp icon"></i>
+          </div>
+          <div class="text-wrap">
+            <div class="link-title">WHATSAPP NUMBER <span class="tag">Personal</span></div>
+            <div class="link-desc">Send a message if necessary</div>
+          </div>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+    </div>
+
+    <!-- OTHER SOCIAL -->
+    <div class="section">
+      <div class="section-title">Other Social Media</div>
+
+      <a class="link" href="https://www.instagram.com/nixellv" target="_blank">
+        <div class="link-left">
+          <div class="icon-wrap">
+            <i class="fab fa-instagram icon"></i>
+          </div>
+          <div class="text-wrap">
+            <div class="link-title">INSTAGRAM <span class="tag">Visual</span></div>
+            <div class="link-desc">Daily content & stories</div>
+          </div>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+      <a class="link" href="https://t.me/nixellflow" target="_blank">
+        <div class="link-left">
+          <div class="icon-wrap">
+            <i class="fab fa-telegram icon"></i>
+          </div>
+          <div class="text-wrap">
+            <div class="link-title">TELEGRAM <span class="tag">Contact</span></div>
+            <div class="link-desc">Chat Telegram</div>
+          </div>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+    </div>
+
+    <div class="footer">NIXELLON • DIGITAL PORTAL</div>
   </div>
 
-  <!-- YOUTUBE & TIKTOK -->
-  <div class="section">
-    <div class="section-title">Youtube & TikTok</div>
+  <div class="tap-note" id="tapNote">Tap layar untuk aktifkan music</div>
 
-    <a class="link" href="https://www.youtube.com/@nixellon" target="_blank">
-      <div class="link-left">
-        <div class="icon-box"><i class="fab fa-youtube icon"></i></div>
-        <div class="link-text">
-          <div class="link-title">YOUTUBE CHANNEL <span class="tag">PRIMARY</span></div>
-          <div class="link-desc">This is my channel</div>
-        </div>
-      </div>
-      <div class="arrow">→</div>
-    </a>
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const tapNote = document.getElementById("tapNote");
+    let musicPlaying = false;
 
-    <a class="link" href="https://www.tiktok.com/@ileon.r" target="_blank">
-      <div class="link-left">
-        <div class="icon-box"><i class="fab fa-tiktok icon"></i></div>
-        <div class="link-text">
-          <div class="link-title">TIKTOK <span class="tag">PRIMARY</span></div>
-          <div class="link-desc">Leon's personal TikTok account</div>
-        </div>
-      </div>
-      <div class="arrow">→</div>
-    </a>
-  </div>
+    bgMusic.volume = 0.35;
 
-  <!-- WHATSAPP -->
-  <div class="section">
-    <div class="section-title">WhatsApp</div>
-
-    <a class="link" href="https://wa.me/6285880712388" target="_blank">
-      <div class="link-left">
-        <div class="icon-box"><i class="fab fa-whatsapp icon"></i></div>
-        <div class="link-text">
-          <div class="link-title">WHATSAPP NUMBER <span class="tag">PERSONAL</span></div>
-          <div class="link-desc">Send a message if necessary</div>
-        </div>
-      </div>
-      <div class="arrow">→</div>
-    </a>
-  </div>
-
-  <!-- OTHER SOCIAL -->
-  <div class="section">
-    <div class="section-title">Other Social Media</div>
-
-    <a class="link" href="https://www.instagram.com/nixellv" target="_blank">
-      <div class="link-left">
-        <div class="icon-box"><i class="fab fa-instagram icon"></i></div>
-        <div class="link-text">
-          <div class="link-title">INSTAGRAM <span class="tag">VISUAL</span></div>
-          <div class="link-desc">Daily content & stories</div>
-        </div>
-      </div>
-      <div class="arrow">→</div>
-    </a>
-
-    <a class="link" href="https://t.me/nixellflow" target="_blank">
-      <div class="link-left">
-        <div class="icon-box"><i class="fab fa-telegram icon"></i></div>
-        <div class="link-text">
-          <div class="link-title">TELEGRAM <span class="tag">CONTACT</span></div>
-          <div class="link-desc">Chat Telegram</div>
-        </div>
-      </div>
-      <div class="arrow">→</div>
-    </a>
-  </div>
-
-  <div class="footer">NEON PROFILE • LEON R.</div>
-</div>
-
-<script>
-const bgMusic = document.getElementById("bgMusic");
-const tapNote = document.getElementById("tapNote");
-let musicStarted = false;
-
-// volume lagu
-bgMusic.volume = 0.35;
-
-// coba autoplay pas web kebuka
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    bgMusic.play().then(() => {
-      musicStarted = true;
-    }).catch(() => {
-      tapNote.innerText = "Tap layar untuk aktifkan music";
-      tapNote.classList.add("show");
+    // coba autoplay
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        bgMusic.play().then(() => {
+          musicPlaying = true;
+          musicBtn.innerHTML = '<i class="fas fa-volume-up"></i> MUSIC ON';
+        }).catch(() => {
+          tapNote.classList.add("show");
+          musicBtn.innerHTML = '<i class="fas fa-volume-mute"></i> TAP TO PLAY';
+        });
+      }, 800);
     });
-  }, 800);
-});
 
-// kalau autoplay gagal, pas user tap pertama kali langsung play
-document.addEventListener("click", () => {
-  if (!musicStarted) {
-    bgMusic.play().then(() => {
-      musicStarted = true;
-      tapNote.classList.remove("show");
-    }).catch(() => {});
-  }
-}, { once:true });
+    // kalau autoplay diblokir, tap pertama play
+    document.addEventListener("click", function firstTap() {
+      if (!musicPlaying) {
+        bgMusic.play().then(() => {
+          musicPlaying = true;
+          tapNote.classList.remove("show");
+          musicBtn.innerHTML = '<i class="fas fa-volume-up"></i> MUSIC ON';
+        }).catch(() => {});
+      }
+      document.removeEventListener("click", firstTap);
+    });
 
-// tiny press effect mobile
-document.querySelectorAll(".link").forEach(link => {
-  link.addEventListener("touchstart", () => {
-    link.style.transform = "scale(0.99)";
-  });
-  link.addEventListener("touchend", () => {
-    link.style.transform = "";
-  });
-});
-</script>
+    // tombol music
+    musicBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      if (musicPlaying) {
+        bgMusic.pause();
+        musicPlaying = false;
+        musicBtn.innerHTML = '<i class="fas fa-volume-mute"></i> MUSIC OFF';
+      } else {
+        bgMusic.play().then(() => {
+          musicPlaying = true;
+          tapNote.classList.remove("show");
+          musicBtn.innerHTML = '<i class="fas fa-volume-up"></i> MUSIC ON';
+        }).catch(() => {
+          tapNote.classList.add("show");
+        });
+      }
+    });
+
+    // efek tap hp
+    document.querySelectorAll(".link").forEach(link => {
+      link.addEventListener("touchstart", () => {
+        link.style.transform = "scale(0.985)";
+      });
+      link.addEventListener("touchend", () => {
+        link.style.transform = "";
+      });
+    });
+  </script>
 
 </body>
-   </html>
+  </html>
